@@ -1,1 +1,102 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="passwordScreen" class="center">
+    <h2>Enter Our Special Code</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button onclick="checkPassword()">Enter</button>
+</div>
+
+<div id="mainContent" style="display:none;">
+
+<div class="hearts"></div>
+
+<audio id="bgMusic" loop>
+    <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container fadeIn">
+
+    <h1>Thank You For Coming Back Into My Life</h1>
+
+    <p class="message">
+        You’re my favorite chapter. And I don’t want it to end.
+    </p>
+
+    <div class="gallery">
+        <img src="images/photo1.jpg">
+        <img src="images/photo2.jpg">
+        <img src="images/photo3.jpg">
+    </div>
+
+    <h2>Will You Be My Valentine?</h2>
+
+    <div class="buttons">
+        <button onclick="yesClicked()">YES ❤️</button>
+        <button id="noBtn" onmouseover="moveNo()">NO 😏</button>
+    </div>
+
+    <p id="response" class="hidden"></p>
+
+</div>
+</div>
+
+<script>
+
+function checkPassword() {
+    const correctPassword = "forever";   // CHANGE THIS
+    const input = document.getElementById("passwordInput").value;
+
+    if(input === correctPassword) {
+        document.getElementById("passwordScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("bgMusic").play();
+        createHearts();
+    } else {
+        alert("Wrong code ❤️ Try again.");
+    }
+}
+
+function yesClicked() {
+    document.getElementById("response").innerText = "You just made me the happiest person alive ❤️";
+    document.getElementById("response").style.display = "block";
+}
+
+function moveNo() {
+    const button = document.getElementById("noBtn");
+    const x = Math.random() * window.innerWidth - 100;
+    const y = Math.random() * window.innerHeight - 100;
+
+    button.style.position = "absolute";
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
+
+function createHearts() {
+    const heartsContainer = document.querySelector(".hearts");
+
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+
+    }, 300);
+}
+
+</script>
+
+</body>
+</html>
